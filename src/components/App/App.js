@@ -23,7 +23,23 @@ class App extends React.Component {
     })
 
     this.handleClick = this.handleClick.bind(this);
+    this.checkGameState = this.checkGameState.bind(this);
     this.resetApp = this.resetApp.bind(this);
+  }
+
+
+  checkGameState() {
+    // increment pairsFound
+    this.setState({
+      pairsFound: this.state.pairsFound + 1
+    });
+
+    // In regards to the right side of the equality check:
+    // the game is a symmetrical matrix. A 6x6 grid has 36 cards or 18 pairs
+    if (this.state.pairsFound === (Math.pow(this.state.board.length, 2) / 2)) {
+      alert("Congratulations you won!");
+      this.resetApp();
+    }
   }
 
 
@@ -93,6 +109,8 @@ class App extends React.Component {
           // used in the error check at the top of this method
           prevClick.dataset.found = "true";
           currClick.dataset.found = "true";
+
+          this.checkGameState();
         }
 
         // wrong guess! revert the cards back to 'hidden' state
