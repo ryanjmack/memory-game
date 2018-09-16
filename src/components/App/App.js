@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Board from '../Board/Board';
+import Reset from '../Reset/Reset';
 import shuffle from './utilities/shuffle';
 
 
@@ -124,6 +125,7 @@ class App extends React.Component {
       <div className="App">
         <h1>Memory Game</h1>
         <Board board={this.state.board} handleClick={this.handleClick} />
+        <Reset resetApp={this.resetApp}/>
       </div>
     )
   }
