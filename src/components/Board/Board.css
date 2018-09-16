@@ -1,2 +1,43 @@
+/***********************************************************************
+* File that contains variables that components van utilize.
+*
+* Here's an example of the Navbar.scss file importing this file:
+* @import "../../stylesheets/variables.scss";
+***********************************************************************/
 .board {
   background-color: pink; }
+
+.board__row {
+  display: flex;
+  font-size: 1.2rem; }
+  .board__row:first-of-type {
+    padding-top: 0.2em; }
+  .board__row:last-of-type {
+    padding-bottom: 0.2em; }
+
+.board__card {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: bold;
+  justify-content: center;
+  height: 4.5em;
+  margin: 0.2em;
+  transition: all 0.3s;
+  width: 4.5em;
+  user-select: none; }
+  .board__card:first-of-type {
+    margin-left: 0.4em; }
+  .board__card:last-of-type {
+    margin-right: 0.4em; }
+  .board__card--active {
+    background-color: #ff6600;
+    color: white; }
+  .board__card--hidden {
+    color: white; }
+    .board__card--hidden:hover {
+      color: #368DDE;
+      background-color: #368DDE; }
+  .board__card--found {
+    color: #999; }

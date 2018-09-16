@@ -1,4 +1,60 @@
+@import "../../stylesheets/variables.scss";
 
 .board {
   background-color: pink;
+}
+
+.board__row {
+  display: flex;
+  font-size: 1.2rem;
+
+  &:first-of-type {
+    padding-top: 0.2em;
+  }
+
+  &:last-of-type {
+    padding-bottom: 0.2em;
+  }
+}
+
+.board__card {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  font: {
+    size: 1.2rem;
+    weight: bold;
+  }
+  justify-content: center;
+  height: 4.5em;
+  margin: 0.2em;
+  transition: all 0.3s;
+  width: 4.5em;
+  user-select: none; 
+
+  &:first-of-type {
+    margin-left: 0.4em;
+  }
+
+  &:last-of-type {
+    margin-right: 0.4em;
+  }
+
+  &--active {
+    background-color: $active-card;
+    color: white;
+  }
+
+  &--hidden {
+    color: white;
+
+    &:hover {
+      color: $card-hover;
+      background-color: $card-hover;
+    }
+  }
+
+  &--found {
+    color: $card-found;
+  }
 }
