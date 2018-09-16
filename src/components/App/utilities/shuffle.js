@@ -16,12 +16,15 @@ export default function shuffle(oldArr) {
   const arr = oldArr.slice();
   const n = arr.length - 1;
 
-  for (let i = n; i >= 1; i--) {
-    for (let j = n; j >= 1; j--) {
-      const col = randomIntGenerator(0, i);
-      const row = randomIntGenerator(0, j);
+  // iterate over all the rows; if i > 0 then you don't get to shuffle first row properly
+  for (let i = n; i >= 0; i--) {
 
-      [arr[i][j], arr[col][row]] = [arr[col][row], arr[i][j]];
+    // but not all of the columns in each row
+    for (let j = n; j > 0; j--) {
+      const x = randomIntGenerator(0, i);
+      const y = randomIntGenerator(0, j);
+
+      [arr[i][j], arr[x][y]] = [arr[x][y], arr[i][j]];
     }
   }
   return arr;
