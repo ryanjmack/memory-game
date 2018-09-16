@@ -24,7 +24,12 @@
   box-sizing: inherit; }
 
 .body {
+  align-items: center;
   background-color: #f9f9f9;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
   margin: 0;
   padding: 0;
   width: 100%; }
