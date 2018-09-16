@@ -14,12 +14,12 @@ const randomIntGenerator = (min, max) => Math.floor(Math.random() * (max - min +
 ***********************************************************************/
 export default function shuffle(oldArr) {
   const arr = oldArr.slice();
-  const n = arr.length;
+  const n = arr.length - 1;
 
-  for (let i = 0; i < n - 2; i++) {
-    for (let j = 0; j < n - 2; j++) {
-      const col = randomIntGenerator(i, n - 1);
-      const row = randomIntGenerator(j, n - 1);
+  for (let i = n; i >= 1; i--) {
+    for (let j = n; j >= 1; j--) {
+      const col = randomIntGenerator(0, i);
+      const row = randomIntGenerator(0, j);
 
       [arr[i][j], arr[col][row]] = [arr[col][row], arr[i][j]];
     }
