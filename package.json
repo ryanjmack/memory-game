@@ -1,6 +1,6 @@
 {
-  "name": "react-boilerplate",
-  "homepage": "https://gitname.github.io/gitrepo-name/",
+  "name": "memory-game",
+  "homepage": "https://github.com/ryanjmack/memory-game",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
