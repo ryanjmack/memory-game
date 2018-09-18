@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Board from '../Board/Board';
 import Reset from '../Reset/Reset';
+import Scoreboard from '../Scoreboard/Scoreboard';
 import shuffle from './utilities/shuffle';
 
 
@@ -10,6 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = ({
+      bestTime: Infinity,
       board: shuffle([
         [1, 1, 2, 2, 3, 3],
         [4, 4, 5, 5, 6, 6],
@@ -19,26 +21,37 @@ class App extends React.Component {
         [16, 16, 17, 17, 18, 18]
       ]),
       lastClicked: null,
-      pairsFound: 0
+      pairsFound: 0,
+      time: 0,
+      timerID: null
     })
 
     this.handleClick = this.handleClick.bind(this);
     this.checkGameState = this.checkGameState.bind(this);
+    this.numPairsOnBoard = this.numPairsOnBoard.bind(this);
     this.resetApp = this.resetApp.bind(this);
   }
 
 
-  checkGameState() {
-    // increment pairsFound
-    this.setState({
-      pairsFound: this.state.pairsFound + 1
-    });
+  numPairsOnBoard() {
+    return (Math.pow(this.state.board.length, 2) / 2);
+  }
 
+
+  checkGameState() {
     // In regards to the right side of the equality check:
     // the game is a symmetrical matrix. A 6x6 grid has 36 cards or 18 pairs
-    if (this.state.pairsFound === (Math.pow(this.state.board.length, 2) / 2)) {
-      alert("Congratulations you won!");
+    if (this.state.pairsFound === (Math.pow(this.state.board.length, 2) / 2))) {
+
+      if (!isFinite(this.state.bestTime) || this.state.time < this.state.bestTime) {
+        this.setState({
+          bestTime: this.state.time
+        });
+      }
+
       this.resetApp();
+
+      alert("Congratulations you won!");
     }
   }
 
@@ -50,6 +63,11 @@ class App extends React.Component {
     if (e) {
       e.preventDefault();
     }
+
+    clearInterval(this.state.timerID);
+    this.setState({
+      timerID: null
+    });
 
     // set all the cards to a hidden state
     [...document.querySelectorAll('.board__card')].forEach(card => {
@@ -64,7 +82,8 @@ class App extends React.Component {
       this.setState({
         board: shuffle(this.state.board),
         lastClicked: null,
-        pairsFound: 0
+        pairsFound: 0,
+        time: 0
       });
     }, 200);
 
@@ -81,6 +100,19 @@ class App extends React.Component {
   ***********************************************************************/
   handleClick(e) {
     const currClick = e.target;
+
+    // first click, start the timer!
+    if (this.state.time === 0 && this.state.timerID === null) {
+      const timerID = setInterval(() => {
+        this.setState({
+          time: this.state.time + 1
+        });
+      }, 1000);
+
+      this.setState({
+        timerID: timerID
+      });
+    }
 
     // error checks
     if (this.state.lastClicked === currClick || e.target.dataset.found === "true") {
@@ -100,6 +132,12 @@ class App extends React.Component {
 
         // the user made a match! set cards to a 'found' state
         if (prevClick.textContent === currClick.textContent) {
+
+          // increment pairsFound
+          this.setState({
+            pairsFound: this.state.pairsFound + 1
+          });
+
           currClick.classList.remove('board__card--active');
           currClick.classList.add('board__card--found');
 
@@ -142,8 +180,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Memory Game</h1>
+        <Scoreboard numPairs={this.numPairsOnBoard()} pairsFound={this.state.pairsFound} time={this.state.time} bestTime={this.state.bestTime} />
         <Board board={this.state.board} handleClick={this.handleClick} />
-        <Reset resetApp={this.resetApp}/>
+        <Reset resetApp={this.resetApp} />
       </div>
     )
   }
