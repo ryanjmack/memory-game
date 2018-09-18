@@ -41,7 +41,7 @@ class App extends React.Component {
   checkGameState() {
     // In regards to the right side of the equality check:
     // the game is a symmetrical matrix. A 6x6 grid has 36 cards or 18 pairs
-    if (this.state.pairsFound === (Math.pow(this.state.board.length, 2) / 2))) {
+    if (this.state.pairsFound === (Math.pow(this.state.board.length, 2) / 2)) {
 
       if (!isFinite(this.state.bestTime) || this.state.time < this.state.bestTime) {
         this.setState({
