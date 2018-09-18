@@ -5,7 +5,8 @@
 * @import "../../stylesheets/variables.scss";
 ***********************************************************************/
 .board {
-  background-color: pink; }
+  background-color: #999;
+  border-radius: 0.2rem; }
 
 .board__row {
   display: flex;
@@ -22,10 +23,10 @@
   font-size: 1.2rem;
   font-weight: bold;
   justify-content: center;
-  height: 4.5em;
+  height: 4.2em;
   margin: 0.2em;
   transition: all 0.3s;
-  width: 4.5em;
+  width: 4.2em;
   user-select: none; }
   .board__card:first-of-type {
     margin-left: 0.4em; }
@@ -35,7 +36,8 @@
     background-color: #ff6600;
     color: white; }
   .board__card--hidden {
-    color: white; }
+    color: white;
+    cursor: pointer; }
     .board__card--hidden:hover {
       color: #368DDE;
       background-color: #368DDE; }

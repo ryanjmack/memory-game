@@ -1,7 +1,8 @@
 @import "../../stylesheets/variables.scss";
 
 .board {
-  background-color: pink;
+  background-color: $board-color;
+  border-radius: 0.2rem;
 }
 
 .board__row {
@@ -26,11 +27,11 @@
     weight: bold;
   }
   justify-content: center;
-  height: 4.5em;
+  height: 4.2em;
   margin: 0.2em;
   transition: all 0.3s;
-  width: 4.5em;
-  user-select: none; 
+  width: 4.2em;
+  user-select: none;
 
   &:first-of-type {
     margin-left: 0.4em;
@@ -47,6 +48,7 @@
 
   &--hidden {
     color: white;
+    cursor: pointer;
 
     &:hover {
       color: $card-hover;
