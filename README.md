@@ -4,7 +4,7 @@ I built this memory game using [React](https://www.google.com/url?sa=t&rct=j&q=&
 
 ### The user stories which have been implemented are as follows:
 
-#####The game must be able to:
+##### The game must be able to:
 
 * Notify the user if they win or lose
 * Allow the user to reset at any time
